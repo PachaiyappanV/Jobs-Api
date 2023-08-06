@@ -1,9 +1,17 @@
 require('dotenv').config();
 require('express-async-errors');
+
+//security packeges
 const helmet=require('helmet');
 const cors=require('cors');
 const xss=require('xss-clean');
 const rateLimiter=require('express-rate-limit');
+
+//swagger ui
+const swaggerUI=require('swagger-ui-express');
+const YAML=require('yamaljs');
+const swaggerDocument=YAML.load('./swagger.yaml');
+
 
 const express=require('express');
 const app=express();
@@ -30,7 +38,10 @@ const authenticate=require('./middleware/authentication');
 const authRoute=require('./routes/auth');
 const jobsRoute=require('./routes/jobs');
 
-
+app.get('/',(req,res)=>{
+  res.send('<h1>Jobs Api</h1><a href="/api-docs">Documentation</a>');
+})
+app.use('/api-docs',swaggerUI.serve,swaggerUI.setup(swaggerDocument));
 
 //using routes
 app.use('/api/v1/auth',authRoute);

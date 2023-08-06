@@ -1,0 +1,241 @@
+openapi: 3.0.0
+info:
+  title: Green-Jobs
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://green-jobs.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Authentication
+      summary: REGISTER
+      operationId: REGISTER
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/REGISTERREQUEST'
+              - example:
+                  name: pachaiyappan
+                  email: pachaiyappan@gmail.com
+                  password: '123456789'
+            example:
+              name: pachaiyappan
+              email: pachaiyappan@gmail.com
+              password: '123456789'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Authentication
+      summary: LOGIN
+      operationId: LOGIN
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LOGINREQUEST'
+              - example:
+                  email: pachaiyappan@gmail.com
+                  password: '123456789'
+            example:
+              email: pachaiyappan@gmail.com
+              password: '123456789'
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    get:
+      tags:
+      - Job Api
+      summary: GETALLJOBS
+      operationId: GETALLJOBS
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    post:
+      tags:
+      - Job Api
+      summary: CREATE JOB
+      operationId: CREATEJOB
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CREATEJOBREQUEST'
+              - example:
+                  company: facebook
+                  position: web developer
+            example:
+              company: facebook
+              position: web developer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /user/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: The user ID
+    get:
+      tags:
+      - Job Api
+      summary: GET JOB
+      operationId: GETJOB
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    delete:
+      tags:
+      - Job Api
+      summary: DELETE JOB
+      operationId: DELETEJOB
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    patch:
+      tags:
+      - Job Api
+      summary: UPDATE JOB
+      operationId: UPDATEJOB
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UPDATEJOBREQUEST'
+              - example:
+                  company: Electronic Arts
+                  position: Devops Engineer
+            example:
+              company: Electronic Arts
+              position: Devops Engineer
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    REGISTERREQUEST:
+      title: REGISTERREQUEST
+      required:
+      - name
+      - email
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: pachaiyappan
+        email: pachaiyappan@gmail.com
+        password: '123456789'
+    LOGINREQUEST:
+      title: LOGINREQUEST
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: pachaiyappan@gmail.com
+        password: '123456789'
+    CREATEJOBREQUEST:
+      title: CREATEJOBREQUEST
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: facebook
+        position: web developer
+    UPDATEJOBREQUEST:
+      title: UPDATEJOBREQUEST
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Electronic Arts
+        position: Devops Engineer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Misc
+  description: ''
+- name: Authentication
+  description: ''
+- name: Job Api
+  description: ''
