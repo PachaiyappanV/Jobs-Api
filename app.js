@@ -9,7 +9,7 @@ const rateLimiter=require('express-rate-limit');
 
 //swagger ui
 const swaggerUI=require('swagger-ui-express');
-const YAML=require('yamaljs');
+const YAML=require('yamljs');
 const swaggerDocument=YAML.load('./swagger.yaml');
 
 
