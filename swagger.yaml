@@ -104,14 +104,14 @@ paths:
       deprecated: false
       security:
       - bearer: []
-  /user/{id}:
+  /jobs/{id}:
     parameters:
       - in: path
         name: id
         schema:
-          type: integer
+          type: string
         required: true
-        description: The user ID
+        description: The job id
     get:
       tags:
       - Job Api
@@ -233,8 +233,7 @@ components:
       scheme: bearer
 security: []
 tags:
-- name: Misc
-  description: ''
+
 - name: Authentication
   description: ''
 - name: Job Api
