@@ -20,12 +20,28 @@ const userSchema=new mongoose.Schema({
         type:String,
         required:[true,'please provide password'],
         minlength:6,
+    },
+    lastName:{
+        type:String,
+        trim:true,
+        maxlength:10,
+        default:'lastName',
+    },
+    location:{
+        type:String,
+        trim:true,
+        maxlength:20,
+        default:'my city',
+        
     }
 });
 
 //pre
 
 userSchema.pre('save',async function(){
+    if(!this.isModified('password')){   //isModified methode is used to check (this.property) is changed or not for more information you can refer mongoose docs
+        return
+    }
     const salt=await bcrypt.genSalt(10);
     this.password=await bcrypt.hash(this.password,salt);
 })

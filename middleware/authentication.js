@@ -13,6 +13,7 @@ const auth=async (req,res,next)=>{
         const payload=jwt.verify(token,process.env.JWT_SECRET);
 
         const user= await User.findById(payload.userId).select('-password');
+        req.tempUser=user.email==='testUser@test.com';
         req.user=user;
         
         // req.user={id:payload.userId,name:payload.name}

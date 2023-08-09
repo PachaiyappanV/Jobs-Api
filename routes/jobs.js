@@ -1,13 +1,16 @@
 const express=require('express');
 const router=express.Router();
+const tempUser=require('../middleware/tempUser');
 
 const {getAllJobs,
        getJob,
        createJob,
        deleteJob,
-       updateJob}=require('../controllers/jobs');
+       updateJob,
+       showStats,}=require('../controllers/jobs');
 
  router.route('/').get(getAllJobs).post(createJob);
- router.route('/:id').get(getJob).delete(deleteJob).patch(updateJob);
+ router.route('/stats').get(showStats);
+ router.route('/:id').get(getJob).delete(tempUser,deleteJob).patch(tempUser,updateJob);
  
  module.exports=router;
